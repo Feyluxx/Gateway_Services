@@ -17,13 +17,16 @@ zone “sysninja.” {
 		type master;
 		file “/etc/bind/forward.sysninja.com”;
 };
+
 Edit that zone file (you can copy the configuration for it from /etc/bind.)
 Basically, insert your domain suffix wherever it says localhost.
 Delete any existing rules other than the nameserver rule, and add to A rules
 @	IN	A	*ip address of server*
 *	IN	A	*ip address of server*
+
 Test your configuration by using a computer on the network to run an nslookup on your domain using your servers ip as their 
 configured dns server.
+
 DHCP; sudo apt-get install isc-dhcp-server
 To configure dhcp, use nano to edit the configuration file; /etc/dhcp/dhcpd.conf
 Change all required information for the configuration file (what you want your dhcp server to give out to clients)
