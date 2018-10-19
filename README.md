@@ -37,30 +37,32 @@ Change all required information for the configuration file (what you want your d
 
 UFW; sudo apt-get ufw(if not already installed)
 Add desired rules using the ufw allow command 
+
 ```sudo ufw allow bind 9/port number {67}
 ```
 To configure ip masquerading using ufw, configure multiple configuration files and add 1 iptables rule.
 In /etc/default/ufw change the 
+
 ```DEFAULT_FORWARD_POLICY to “ACCEPT”:
 ```
 
 Then edit /etc/ufw/sysctl.conf and uncomment:
 Use the iptables command 
+
 ```iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o ppp0 -j MASQUERADE
 ```
 Where the ip and interface match your topology.
 
 SQUID PROXY; sudo apt-get 
 Add the following lines to the /etc/squid/squid.conf file.
+
 ```http_port 3129
-```
-```http_port 3128 intercept
-```
-```acl lan src 192.168.0.0/24
-```
-```http_access allow lan 
+http_port 3128 intercept
+acl lan src 192.168.0.0/24
+http_access allow lan
 ```
 Save the file and then run the 
+
 ```sudo iptables -t nat -A PREROUTING -i enx0050b617c34f -p tcp -m tcp --dport 80 -j DNAT --to-destination 192.168.0.1:3128
 ```
 Replace the interface and ip address the that of your internal network and you’re good to go! (Should be)
