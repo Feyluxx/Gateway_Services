@@ -5,7 +5,9 @@ while i also have a external nic routing traffic from the 172 network. I used a 
 and IP Masquerading to allow my client machines on the 10 network internet access on the 172 network.
 Installation of the following can be done as follows:
 DNS; 
-```sudo apt-install bind9```
+```
+sudo apt-install bind9
+```
 Open /etc/bind/named.conf.options in nano and edit the forwarders; add known dns servers that you want your dns server to pull from 
 such as 8.8.8.8. Always end these lines with a semi-colon.
 ```Forwarders {
@@ -65,9 +67,10 @@ http_port 3128 intercept
 acl lan src 192.168.0.0/24
 http_access allow lan
 ```
-Save the file and then run the 
+Save the file and then run the ip tables command:
 
-```sudo iptables -t nat -A PREROUTING -i enx0050b617c34f -p tcp -m tcp --dport 80 -j DNAT --to-destination 192.168.0.1:3128
+```
+sudo iptables -t nat -A PREROUTING -i enx0050b617c34f -p tcp -m tcp --dport 80 -j DNAT --to-destination 192.168.0.1:3128
 ```
 Replace the interface and ip address the that of your internal network and you’re good to go! (Should be)
 
