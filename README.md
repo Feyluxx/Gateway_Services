@@ -39,6 +39,7 @@ In /etc/default/ufw change the DEFAULT_FORWARD_POLICY to “ACCEPT”:
 Then edit /etc/ufw/sysctl.conf and uncomment:
 Use the iptables command “iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o ppp0 -j MASQUERADE”
 Where the ip and interface match your topology.
+
 SQUID PROXY; sudo apt-get 
 Add the following lines to the /etc/squid/squid.conf file.
 http_port 3129
