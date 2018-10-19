@@ -21,8 +21,9 @@ zone “sysninja.” {
 Edit that zone file (you can copy the configuration for it from /etc/bind.)
 Basically, insert your domain suffix wherever it says localhost.
 Delete any existing rules other than the nameserver rule, and add to A rules
-@	IN	A	*ip address of server*
-*	IN	A	*ip address of server*
+
+"@	IN	A	*ip address of server*
+*	IN	A	*ip address of server*"
 
 Test your configuration by using a computer on the network to run an nslookup on your domain using your servers ip as their 
 configured dns server.
