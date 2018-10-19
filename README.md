@@ -1,7 +1,12 @@
-My Ubuntu server has compiled a great deal of basic gateway services, all functioning (finally) as they should be. This includes DNS, DHCP, UFW(Uncomplicated Firewall) and a Squid transparent Proxy. These can all be simply installed using the sudo apt-get command. These services are all running on an internal network interface card on a private 10.0.0.0/24 network (ens224) while i also have a external nic routing traffic from the 172 network. I used a combination of UFW and iptables in order to use NAT and IP Masquerading to allow my client machines on the 10 network internet access on the 172 network.
+My Ubuntu server has compiled a great deal of basic gateway services, all functioning (finally) as they should be. 
+This includes DNS, DHCP, UFW(Uncomplicated Firewall) and a Squid transparent Proxy. These can all be simply installed using the 
+sudo apt-get command. These services are all running on an internal network interface card on a private 10.0.0.0/24 network (ens224) 
+while i also have a external nic routing traffic from the 172 network. I used a combination of UFW and iptables in order to use NAT 
+and IP Masquerading to allow my client machines on the 10 network internet access on the 172 network.
 Installation of the following can be done as follows:
 DNS; sudo apt-install bind9
-Open /etc/bind/named.conf.options in nano and edit the forwarders; add known dns servers that you want your dns server to pull from such as 8.8.8.8. Always end these lines with a semi-colon.
+Open /etc/bind/named.conf.options in nano and edit the forwarders; add known dns servers that you want your dns server to pull from 
+such as 8.8.8.8. Always end these lines with a semi-colon.
 Forwarders {
 	8.8.8.8;
 	1.1.1.1;
@@ -17,7 +22,8 @@ Basically, insert your domain suffix wherever it says localhost.
 Delete any existing rules other than the nameserver rule, and add to A rules
 @	IN	A	*ip address of server*
 *	IN	A	*ip address of server*
-Test your configuration by using a computer on the network to run an nslookup on your domain using your servers ip as their configured dns server.¬¬¬
+Test your configuration by using a computer on the network to run an nslookup on your domain using your servers ip as their 
+configured dns server.
 DHCP; sudo apt-get install isc-dhcp-server
 To configure dhcp, use nano to edit the configuration file; /etc/dhcp/dhcpd.conf
 Change all required information for the configuration file (what you want your dhcp server to give out to clients)
