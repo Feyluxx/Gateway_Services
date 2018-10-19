@@ -10,14 +10,16 @@ sudo apt-install bind9
 ```
 Open /etc/bind/named.conf.options in nano and edit the forwarders; add known dns servers that you want your dns server to pull from 
 such as 8.8.8.8. Always end these lines with a semi-colon.
-```Forwarders {
+```
+Forwarders {
 	8.8.8.8;
 	1.1.1.1;
 ```
 
 The closing bracket is later on in the file.
 Create a zone within /etc/bind/named.conf.local
-```zone “sysninja.” {
+```
+zone “sysninja.” {
 		type master;
 		file “/etc/bind/forward.sysninja.com”;
 };
